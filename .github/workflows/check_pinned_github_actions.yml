@@ -1,0 +1,13 @@
+on: push
+
+name: Ensure SHA-Pinned GitHub Actions
+
+jobs:
+  scan:
+    name: Scan repo for git tags
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@f1d3225b5376a0791fdee5a0e8eac5289355e43a # pin@v2
+      - name: Ensure SHA pinned actions
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@8172b37580d6a53e68e52050169fc78a52d39f85 # pin@v1.0.2
