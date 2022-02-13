@@ -1,0 +1,27 @@
+---
+### Source: https://github.com/the-commons-project/terragrunt-github-actions
+name: 'Terragrunt GitHub Actions'
+on:
+  - pull_request
+env:
+  tf_version: 'latest'
+  tg_version: 'latest'
+  tf_working_dir: '.'
+jobs:
+  terragrunt:
+    name: 'Terragrunt'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # pin@master
+      - name: 'Terragrunt Format'
+        uses: the-commons-project/terragrunt-github-actions@259fc9e56d89b4331cf23f6d3c4a1895cc754d2a # pin@master
+        with:
+          tf_actions_version: ${{ env.tf_version }}
+          tg_actions_version: ${{ env.tg_version }}
+          tf_actions_binary: 'terraform'
+          tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: ${{ env.tf_working_dir }}
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
